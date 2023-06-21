@@ -2,27 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
+use App\Models\Category;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $products = [
-            ['name' => 'Product 1', 'category_id' => 1],
-            ['name' => 'Product 2', 'category_id' => 1],
-            ['name' => 'Product 3', 'category_id' => 2],
-            // Add more products as needed
-        ];
+        $laptopCategory = Category::where('name', 'Laptops')->first();
+        $ultraBookCategory = Category::where('name', 'Ultrabooks')->first();
+        $smartphoneCategory = Category::where('name', 'Smartphones')->first();
 
-        foreach ($products as $product) {
-            Product::create($product);
-        }
+        Product::create([
+            'name' => 'Dell XPS 13',
+            'description' => 'Powerful ultraBook with high-end specs',
+            'price' => 1499.99,
+            'category_id' => $ultraBookCategory->id,
+        ]);
+
+        Product::create([
+            'name' => 'HP Spectre x360',
+            'description' => 'Convertible laptop with sleek design',
+            'price' => 1299.99,
+            'category_id' => $ultraBookCategory->id,
+        ]);
+
+        Product::create([
+            'name' => 'Samsung Galaxy S21',
+            'description' => 'Flagship smartphone with powerful camera',
+            'price' => 999.99,
+            'category_id' => $smartphoneCategory->id,
+        ]);
     }
 }

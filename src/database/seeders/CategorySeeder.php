@@ -1,26 +1,21 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Category;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $categories = [
-            ['name' => 'Category 1'],
-            ['name' => 'Category 2'],
-            // Add more categories as needed
-        ];
+        Category::create(['name' => 'Electronics']);
 
-        foreach ($categories as $category) {
-            Category::create($category);
-        }
+        $laptopCategory = Category::create(['name' => 'Laptops']);
+        Category::create(['name' => 'Gaming Laptops', 'parent_id' => $laptopCategory->id]);
+        Category::create(['name' => 'Ultrabooks', 'parent_id' => $laptopCategory->id]);
+
+        $phoneCategory = Category::create(['name' => 'Phones']);
+        Category::create(['name' => 'Smartphones', 'parent_id' => $phoneCategory->id]);
+        Category::create(['name' => 'Feature Phones', 'parent_id' => $phoneCategory->id]);
     }
 }
